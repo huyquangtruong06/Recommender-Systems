@@ -8,13 +8,26 @@ The project includes two main approaches to solve the optimization problem:
 
 2. **Modern implementation (Framework):** Using TensorFlow, GradientTape and Adam optimizer (for high performance and scalability).
 
-## 📂 Data Structure
+# Movie Recommender System - Collaborative Filtering
 
-The project requires 2 main data files (commonly found in MovieLens dataset):
+Dự án này xây dựng một hệ thống gợi ý phim (Movie Recommender System) sử dụng kỹ thuật **Collaborative Filtering** (Lọc cộng tác) với thuật toán **Matrix Factorization** (Phân rã ma trận).
 
-- `movies.csv`: Contains movie information (movieId, title).
+Dự án được triển khai trên Jupyter Notebook, so sánh hai phương pháp tiếp cận:
 
-- `ratings.csv`: Contains user ratings (userId, movieId, rating).
+1.  **Low-level implementation:** Sử dụng NumPy để xây dựng thuật toán Gradient Descent từ đầu (from scratch).
+2.  **High-level implementation:** Sử dụng TensorFlow (GradientTape, Adam Optimizer) để tối ưu hóa quá trình huấn luyện và khả năng mở rộng.
+
+## 📂 Structure Project
+
+````text
+📦 Movie-Recommender-System
+ ┣ 📜 Recommender_System_Collaborative_Filtering.ipynb  # Main Source Code
+ ┣ 📜 README.md                                         # Guide
+ ┣ 📂 Dataset (MovieLens Small)
+ ┃ ┣ 📜 movies.csv   # Danh sách phim (ID, Title, Genres)
+ ┃ ┣ 📜 ratings.csv  # Dữ liệu đánh giá (User, Movie, Rating)
+ ┃ ┣ 📜 links.csv    # Liên kết ID với IMDB/TMDB
+ ┃ ┗ 📜 tags.csv     # Thẻ từ khóa (Tags)
 
 ## 🚀 Main features
 
@@ -62,4 +75,4 @@ To run this notebook, you need to install the following libraries:
 
 ```bash
 pip install pandas numpy matplotlib tensorflow
-```
+````
