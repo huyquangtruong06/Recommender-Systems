@@ -54,7 +54,9 @@ $$\text{Prediction} = X \cdot W^T + b$$
 
 The objective function includes the mean square error (MSE) and the Regularization component (to avoid Overfitting):
 
-$$J(X, W, b) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \left( \sum_{j=0}^{n_u-1} \sum_{k=0}^{n-1} (wk^{(j)})^2 + \sum_{i=0}^{nm-1} \sum_{k=0}^{n-1} (x_k^{(i)})^2 \right)$$
+$$
+J(X, W, b) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \left( \sum_{j=0}^{n_u-1} \sum_{k=0}^{n-1} (wk^{(j)})^2 + \sum_{i=0}^{nm-1} \sum_{k=0}^{n-1} (x_k^{(i)})^2 \right)
+$$
 
 ### 4. Optimization Method
 
