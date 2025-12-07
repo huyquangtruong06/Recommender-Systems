@@ -19,7 +19,7 @@ The project is implemented in Jupyter Notebook, comparing two approaches:
 2. **High-level implementation:** Using TensorFlow (GradientTape, Adam Optimizer) to optimize training and scalability.
 
 ## 📂 Structure Project
-
+````
 📦 Movie-Recommender-System
 ┣ 📜 Recommender_System_Collaborative_Filtering.ipynb # Main Source Code
 ┣ 📜 README.md # Guide
@@ -28,7 +28,7 @@ The project is implemented in Jupyter Notebook, comparing two approaches:
 ┃ ┣ 📜 ratings.csv # Rating data (User, Movie, Rating)
 ┃ ┣ 📜 links.csv # Link ID to IMDB/TMDB
 ┃ ┗ 📜 tags.csv # Keyword tags (Tags)
-
+````
 ## 🚀 Main features
 ### 1. Data Preprocessing
 
