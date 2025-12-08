@@ -1,81 +1,75 @@
-# Collaborative Filtering Recommender System
+# Recommender System Project
 
-This project implements a movie recommendation system (Movie Recommender System) using the **Collaborative Filtering** technique based on the **Matrix Factorization** method.
+This project implements and compares two popular approaches for building Recommender Systems: **Content-Based Filtering** using Deep Learning and **Collaborative Filtering** using Matrix Factorization.
 
-The project includes two main approaches to solve the optimization problem:
+The project is written in Python and leverages powerful data analysis and machine learning libraries such as TensorFlow, Pandas, and NumPy.
 
-1. **Handmade implementation (Scratch):** Using NumPy to calculate pure Gradient Descent (for deep mathematical understanding).
+## 📂 Project Structure
 
-2. **Modern implementation (Framework):** Using TensorFlow, GradientTape and Adam optimizer (for high performance and scalability).
+The project consists of two main notebooks corresponding to the two approaches:
 
-# Movie Recommender System - Collaborative Filtering
+### 1. Deep Learning for Content-Based Filtering
+**File:** `Deep Learning for Content-Based Filtering.ipynb`
 
-This project builds a movie recommendation system (Movie Recommender System) using **Collaborative Filtering** technique with **Matrix Factorization** algorithm.
+This method suggests movies based on the characteristics (features) of both the user and the items (movies).
+* **Technique:** Neural Networks using TensorFlow/Keras.
+* **Data Processing:**
+    * *Movie Features:* Extracts release year and applies One-hot encoding for movie genres.
+    * *User Features:* Computes a user preference vector based on their average ratings across different genres.
+* **Model Architecture:**
+    * Consists of two parallel sub-networks: **User Network** (generates vector $v_u$) and **Item Network** (generates vector $v_m$).
+    * The output is the Dot product of these two vectors to predict the rating.
+* **Additional Feature:** Recommends similar movies by calculating the squared distance between movie vectors ($v_m$).
 
-The project is implemented in Jupyter Notebook, comparing two approaches:
+### 2. Collaborative Filtering Recommender Systems
+**File:** `Recommender_System_Collaborative_Filtering.ipynb`
 
-1. **Low-level implementation:** Using NumPy to build the Gradient Descent algorithm from scratch.
+This method recommends items based on the similarity in rating behavior among users, without needing detailed knowledge of the movie content.
+* **Technique:** Matrix Factorization.
+* **Algorithms:**
+    * Implementation of **Gradient Descent** from scratch to optimize the Cost Function with Regularization ($\lambda$).
+    * Uses **Mean Normalization** to handle the "Cold Start" problem (new users with no ratings).
+    * Includes a parallel implementation using **TensorFlow** (with `tf.GradientTape` and `keras.optimizers`) for performance comparison and optimization.
+* **Goal:** To learn latent vectors $X$ (for movies) and $W$ (for users) such that their product best predicts the actual ratings.
 
-2. **High-level implementation:** Using TensorFlow (GradientTape, Adam Optimizer) to optimize training and scalability.
+## 📊 Dataset
 
-## 📂 Structure Project
-````
-📦 Movie-Recommender-System
-┣ 📜 Recommender_System_Collaborative_Filtering.ipynb # Main Source Code
-┣ 📜 README.md # Guide
-┣ 📂 Dataset (MovieLens Small)
-┃ ┣ 📜 movies.csv # List of movies (ID, Title, Genres)
-┃ ┣ 📜 ratings.csv # Rating data (User, Movie, Rating)
-┃ ┣ 📜 links.csv # Link ID to IMDB/TMDB
-┃ ┗ 📜 tags.csv # Keyword tags (Tags)
-````
-## 🚀 Main features
-### 1. Data Preprocessing
+The project uses the MovieLens dataset (or a similar structure) containing CSV files:
+* `movies.csv`: Contains movie information (`movieId`, `title`, `genres`).
+* `ratings.csv`: Contains user ratings (`userId`, `movieId`, `rating`, `timestamp`).
 
-- Mapping the original `userId` and `movieId` to the continuous index of the matrix.
+## 🛠 Technologies Used
 
-- Creating the rating matrix $Y$ (num_movies $\times$ num_users) and the binary matrix $R$ (marking rated movies).
+* **Language:** Python
+* **Deep Learning Framework:** TensorFlow, Keras
+* **Data Manipulation:** Pandas, NumPy
+* **Visualization:** Matplotlib
+* **Machine Learning Tools:** Scikit-learn (StandardScaler, MinMaxScaler, train_test_split)
 
-### 2. Mean Normalization
+## 🚀 Installation and Usage
 
-- Performing mean normalization for the rating matrix.
+1.  **Clone the repository** (or download the files):
+    ```bash
+    git clone <your-repo-url>
+    cd <your-project-folder>
+    ```
 
-- **Purpose:** Solve the **Cold Start** problem for new movies that have no ratings or new users that have not rated any movies.
+2.  **Install necessary libraries:**
+    Ensure you have Python installed along with the following libraries:
+    ```bash
+    pip install numpy pandas matplotlib tensorflow scikit-learn tabulate
+    ```
 
-### 3. Machine Learning Algorithm
+3.  **Prepare Data:**
+    Place the `movies.csv` and `ratings.csv` files in the same directory as the notebooks.
 
-The rating prediction model is based on the linear formula between the Movie Feature Vector ($X$) and the User Parameter Vector ($W$):
+4.  **Run the Notebooks:**
+    Open Jupyter Notebook or JupyterLab and execute the cells in the `.ipynb` files to observe the training process and recommendation results.
 
-$$
-\text{Prediction} = X \cdot W^T + b
-$$
+## 📈 Results
 
-#### Cost Function
+* **Content-Based:** The model can predict a user's rating for a specific movie and generate a list of movies with similar content (e.g., genre, style) to a source movie.
+* **Collaborative Filtering:** The system predicts missing ratings in the User-Item matrix, providing a personalized Top-N movie list for specific users based on their latent preferences.
 
-The objective function includes the mean square error (MSE) and the Regularization component (to avoid Overfitting):
-
-$$
-J(X, W, b) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \left( \sum_{j=0}^{n_u-1} \sum_{k=0}^{n-1} (wk^{(j)})^2 + \sum_{i=0}^{nm-1} \sum_{k=0}^{n-1} (x_k^{(i)})^2 \right)
-$$
-
-### 4. Optimization Method
-
-- **Method 1: NumPy (Low-level)**
-- Calculate partial derivatives $\frac{\partial J}{\partial X}, \frac{\partial J}{\partial W}, \frac{\partial J}{\partial b}$ manually.
-
-- Update weights via Gradient Descent loop.
-
-- **Method 2: TensorFlow (High-level)**
-- Use `tf.Variable` to store parameters $X, W, b$.
-
-- Use `tf.GradientTape` for Auto Differentiation.
-
-- Use `keras.optimizers.Adam` for optimizing focusing speed.
-
-## 🛠 Prerequisites
-
-To run this notebook, you need to install the following libraries:
-
-```bash
-pip install pandas numpy matplotlib tensorflow
-````
+---
+*This project is part of a study and implementation of Recommender Systems.*
